@@ -5,9 +5,8 @@
 http.host: "0.0.0.0"
 
 ## auto reload logstash.config
-# path.config: /usr/share/logstash/pipeline
-# config.reload.automatic: true
-# config.reload.interval: 300
+config.reload.automatic: true
+config.reload.interval: 300
 
 xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 

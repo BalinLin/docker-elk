@@ -1,0 +1,4 @@
+# - pipeline.id: preprocessor
+#   path.config: "/usr/share/logstash/pipeline/logstash_pre.conf"
+- pipeline.id: main
+  path.config: "/usr/share/logstash/pipeline/logstash.conf"
