@@ -1,1 +1,4 @@
 /mydata/*.csv
+
+!/mydata/AnalysisLogClickIDLookup.csv
+!/mydata/ClickLogClickIDLookup.csv
