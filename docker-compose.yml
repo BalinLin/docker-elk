@@ -48,6 +48,9 @@ services:
       - type: bind # bind local folder
         source: ./mydata
         target: /usr/mydata
+      - type: bind # bind local folder
+        source: ./mylookup
+        target: /usr/mylookup
     ports:
       - "5044:5044"
       - "5000:5000/tcp"
