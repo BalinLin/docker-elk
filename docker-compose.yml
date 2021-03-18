@@ -18,10 +18,10 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m" # RAM size must < 1/2
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
-      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       discovery.type: single-node
     networks:
       - elk
@@ -31,15 +31,10 @@ services:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
-    # command: bin/logstash -f /usr/share/logstash/pipeline/logstash.conf --config.reload.automatic --config.reload.interval 1
     volumes:
       - type: bind
         source: ./logstash/config/logstash.yml
         target: /usr/share/logstash/config/logstash.yml
-        read_only: true
-      - type: bind
-        source: ./logstash/config/pipelines.yml
-        target: /usr/share/logstash/config/pipelines.yml
         read_only: true
       - type: bind
         source: ./logstash/pipeline
@@ -52,13 +47,11 @@ services:
         source: ./mylookup
         target: /usr/mylookup
     ports:
-      - "5044:5044"
       - "5000:5000/tcp"
       - "5000:5000/udp"
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-      # LS_OPTS: "--config.reload.automatic"  ## auto reload logstash.config
     networks:
       - elk
     depends_on:
@@ -74,6 +67,9 @@ services:
         source: ./kibana/config/kibana.yml
         target: /usr/share/kibana/config/kibana.yml
         read_only: true
+      - type: bind
+        source: ./kibana/plugins
+        target: /opt/kibana/plugins
     ports:
       - "5601:5601"
     networks:
